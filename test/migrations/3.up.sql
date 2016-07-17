@@ -1,0 +1,1 @@
+ALTER TABLE table_v2 ADD COLUMN a TEXT;

@@ -1,2 +1,1 @@
-# migrator
-The Simplest Database Schema Migration Tool
+# Migrator is a simple database migration tool

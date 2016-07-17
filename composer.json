@@ -1,0 +1,35 @@
+{
+  "name": "lazypdo/migrator",
+  "type": "library",
+  "description": "A Simple Database Schema Migration Tool For PHP",
+  "keywords": [
+    "pdo",
+    "database",
+    "migration",
+    "sql"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alexey Karapetov",
+      "email": "karapetov@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "symfony/console": "^2.8 || ^3.0"
+  },
+  "bin": [
+    "migrator"
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "^5.0",
+    "friendsofphp/php-cs-fixer": "^1.9"
+  },
+  "autoload": {
+    "psr-4": {
+      "Migrator\\": "src/"
+    }
+  }
+}
