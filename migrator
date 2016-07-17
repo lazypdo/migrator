@@ -1,9 +1,5 @@
 #!/usr/bin/env php
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
-$app = new \Migrator\Console\Application(
-    new \Migrator\Factory\ConfigurableFactory(
-        new \Migrator\Factory\Config\JSONConfigProvider('migrator.json')
-    )
-);
+$app = new \Migrator\Console\Application();
 $app->run();

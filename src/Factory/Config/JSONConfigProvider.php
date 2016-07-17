@@ -26,7 +26,7 @@ class JSONConfigProvider implements ProviderInterface
     public function getConfig($db_name)
     {
         if (!is_file($this->file) || !is_readable($this->file)) {
-            throw new RuntimeException("Can not find config file. Please make sure '{$this->file}' is within \$PATH.");
+            throw new RuntimeException("Can not find config file '{$this->file}'");
         }
         $config = json_decode(file_get_contents($this->file), true);
         if (isset($config[$db_name]) && is_array($config[$db_name])) {
