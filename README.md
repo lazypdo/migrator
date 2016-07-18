@@ -77,7 +77,7 @@ Migrates the database to the given target version.
 
 ## Using Migrator in your project
 Your project might already have its configuration infrastructure.
-You can tailor Migrator to your needs in just three steps.
+You can tailor Migrator to your needs in just two steps.
 
 ### 1. Implement \Migrator\Factory\FactoryInterface
 This is what gives the console application an instance of Migrator for
@@ -94,6 +94,7 @@ class MyMigratorFactory implements \Migrator\Factory\FactoryInterface
     public function getMigrator($name)
     {
         // Here you will need 3 components
+        
         /* @var PDO */
         $pdo = ...;// Get it from your config according to the $name
         
@@ -108,28 +109,16 @@ class MyMigratorFactory implements \Migrator\Factory\FactoryInterface
 }
 ```
 
-### 2. Extend \Migrator\Console\Application
-In your custom application, set the factory in the constructor.
-
-```php
-class MyMigratorApplication extends \Migrator\Console\Application
-{
-    public function __construct()
-    {
-        parent::__construct();
-        $this->setFactory(new MyMigratorFactory());
-    }
-}
-```
-
-### 3. Create your executable
+### 2. Create your executable
 Create a file called `my_migrator` in your project's bin directory.
 
 ```php
 #!/usr/bin/env php
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
-$app = new MyMigratorApplication();
+$app = new \Migrator\Console\Application(
+    new MyMigratorFactory()
+);
 $app->run();
 ```
 

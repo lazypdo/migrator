@@ -23,9 +23,16 @@ class Application extends ConsoleApplication
      * @var FactoryInterface
      */
     private $factory;
-    
-    public function __construct()
+
+    /**
+     * Application constructor.
+     * @param FactoryInterface|null $factory
+     */
+    public function __construct(FactoryInterface $factory = null)
     {
+        if ($factory) {
+            $this->factory = $factory;
+        }
         parent::__construct('Migrator', self::VERSION);
         $this->addCommands([
             new StatusCommand(),
@@ -33,11 +40,23 @@ class Application extends ConsoleApplication
         ]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function doRun(InputInterface $input, OutputInterface $output)
     {
-        if ($this->getFactory() instanceof FactoryInterface) {
-            $this->setDefaultFactory($input);
+        if (!$this->factory) {
+            $config_file = $input->getParameterOption(['--config', '-c'], self::DEFAULT_CONFIG_FILE);
+            switch (pathinfo($config_file, PATHINFO_EXTENSION)) {
+                case 'php':
+                    $provider = new PHPConfigProvider($config_file);
+                    break;
+                default:
+                    $provider = new JSONConfigProvider($config_file);
+            }
+            $this->factory = new ConfigurableFactory($provider);
         }
+
         return parent::doRun($input, $output);
     }
 
@@ -50,42 +69,23 @@ class Application extends ConsoleApplication
     }
 
     /**
-     * @param FactoryInterface $factory
-     */
-    public function setFactory(FactoryInterface $factory)
-    {
-        $this->factory = $factory;
-    }
-
-    /**
-     * @return InputDefinition
+     * @inheritdoc
      */
     protected function getDefaultInputDefinition()
     {
         $def = parent::getDefaultInputDefinition();
-        $def->addOption(
-            new InputOption(
-                '--config',
-                '-c',
-                InputOption::VALUE_OPTIONAL,
-                'Configuration file',
-                self::DEFAULT_CONFIG_FILE
-            )
-        );
-        return $def;
-    }
 
-    private function setDefaultFactory(InputInterface $input)
-    {
-        $config_file = $input->getParameterOption(['--config', '-c'], self::DEFAULT_CONFIG_FILE);
-        $ext = pathinfo($config_file, PATHINFO_EXTENSION);
-        switch ($ext) {
-            case 'php':
-                $provider = new PHPConfigProvider($config_file);
-                break;
-            default:
-                $provider = new JSONConfigProvider($config_file);
+        if (!$this->factory) {
+            $def->addOption(
+                new InputOption(
+                    '--config',
+                    '-c',
+                    InputOption::VALUE_OPTIONAL,
+                    'Configuration file',
+                    self::DEFAULT_CONFIG_FILE
+                )
+            );
         }
-        $this->setFactory(new ConfigurableFactory($provider));
+        return $def;
     }
 }
