@@ -22,14 +22,14 @@ Examples:
 It is recommended to put a few leading zeros to make the migrations appear nicely sorted in file managers.
 
 ### Versions
-A file "N.up.sql" defines the migration **from N-1 to N**. 
-A file "N.down.sql" defines the migration **from N back to N-1**.
+* A file **N.up.sql** defines the migration **from N-1 to N**. 
+* A file **N.down.sql** defines the migration **from N back to N-1**.
 
 Versions must start with 1. Every consequential upward migration must take the next natural number. 
 When it is not possible to create a corresponding downward migration, it must be omitted. 
 E.g. if "42.up.sql" exists, but "42.down.sql" does not, Migrator will only be able to go from 41 to 42 but never back.
 
-## Using standalone
+## Using Migrator standalone
 
 Configuration is pretty straightforward. 
 Create a configuration file "migrator.php":
@@ -51,10 +51,12 @@ return [
 
 Parameters _user_, _password_, and _options_ are optional.
 
-You can add as many database as you want. The configuration file must
+You can add as many databases as you want. The configuration file must
 either be in the current directory or specified using `--config` option:
 
 `./migrator --config=/path/to/migrator.php status`
+
+It is also possible to use json configs.
 
 Migrator has just two commands: status and migrate.
 
@@ -70,9 +72,9 @@ Migrates the database to the given target version.
 
 `./migrator my_database migrate`
 
-## Using in your project
+## Using Migrator in your project
 Your project might already have its configuration infrastructure.
-You can tailor Migrator to your project in just three steps.
+You can tailor Migrator to your needs in just three steps.
 
 ### 1. Implement \Migrator\Factory\FactoryInterface
 This is what gives the console application an instance of Migrator for
