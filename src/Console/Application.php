@@ -15,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Application extends ConsoleApplication
 {
-    const VERSION = '0.0.6';
+    const VERSION = '0.0.7';
 
     const DEFAULT_CONFIG_FILE = 'migrator.php';
 
