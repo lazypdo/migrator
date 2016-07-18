@@ -4,9 +4,9 @@ namespace Migrator\Factory;
 interface FactoryInterface
 {
     /**
-     * Get an instance of Migrator for the given config
-     * @param string $name
+     * Get an instance of Migrator for the given database
+     * @param string $database
      * @return \Migrator\Migrator
      */
-    public function getMigrator($name);
+    public function getMigrator($database);
 }

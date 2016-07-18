@@ -34,8 +34,8 @@ class MigrateCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $name = $input->getArgument('name');
-        $migrator = $this->getMigrator($name);
+        $database = $input->getArgument('database');
+        $migrator = $this->getMigrator($database);
         list($lowest, $current, $highest) = $migrator->getVersionRange();
         $target = $input->getArgument('target');
         if ($target == self::HIGHEST) {
@@ -57,6 +57,6 @@ class MigrateCommand extends BaseCommand
         }
         $migrator->migrateTo($target);
         list($lowest, $current, $highest) = $migrator->getVersionRange();
-        $this->printStatus($output, $name, $lowest, $current, $highest);
+        $this->printStatus($output, $database, $lowest, $current, $highest);
     }
 }

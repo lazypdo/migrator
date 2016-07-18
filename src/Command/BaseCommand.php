@@ -11,15 +11,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 class BaseCommand extends Command implements FactoryInterface
 {
     /**
-     * Get an instance of Migrator for the given config
-     * @param string $name
+     * Get an instance of Migrator for the given database
+     * @param string $database
      * @return Migrator
      */
-    public function getMigrator($name)
+    public function getMigrator($database)
     {
         $app = $this->getApplication();
         if ($app instanceof Application) {
-            return $app->getFactory()->getMigrator($name);
+            return $app->getFactory()->getMigrator($database);
         }
         throw new LogicException('Application is expected to be an instance of \\Migrator\\Console\\Application');
     }

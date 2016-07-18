@@ -25,11 +25,9 @@ class ConfigurableFactory implements FactoryInterface
     }
 
     /**
-     * Get an instance of Migrator for the given config
-     * @param string $name
-     * @return Migrator
+     * @inheritdoc
      */
-    public function getMigrator($name)
+    public function getMigrator($database)
     {
         $config = array_merge(
             [
@@ -38,10 +36,10 @@ class ConfigurableFactory implements FactoryInterface
                 'password'   => null,
                 'migrations' => 'migrations',
             ],
-            $this->provider->getConfig($name)
+            $this->provider->getConfig($database)
         );
         if (empty($config['dsn'])) {
-            throw new RuntimeException("DSN in not configured for database $name");
+            throw new RuntimeException("DSN in not configured for database $database");
         }
         $pdo = new PDO(
             $config['dsn'],
