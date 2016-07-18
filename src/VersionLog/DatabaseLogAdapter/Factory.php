@@ -15,7 +15,7 @@ class Factory implements FactoryInterface
      * @param PDO $pdo
      * @return AbstractAdapter
      */
-    public function getAdapter(PDO $pdo): AbstractAdapter
+    public function getAdapter(PDO $pdo)
     {
         $driver = $pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
         if (isset($this->adapters[$driver])) {

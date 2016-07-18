@@ -52,7 +52,9 @@ class ConfigurableFactory implements FactoryInterface
                 $this->getKey('migrations', $config)
             );
         } catch (OutOfBoundsException $e) {
-            throw new InvalidArgumentException("Value for '{$e->getMessage()}' must be configured for database '$name'");
+            throw new InvalidArgumentException(
+                "Value for '{$e->getMessage()}' must be configured for database '$name'"
+            );
         }
         $log = new DatabaseLog();
         return new Migrator($pdo, $reader, $log);

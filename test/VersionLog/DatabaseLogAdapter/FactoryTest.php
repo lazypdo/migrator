@@ -29,7 +29,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
      * @param string $class
      * @dataProvider driverDataProvider
      */
-    public function testGetAdapter(string $driver_name, string $class)
+    public function testGetAdapter($driver_name, $class)
     {
         $this->pdo->expects($this->once())
             ->method('getAttribute')

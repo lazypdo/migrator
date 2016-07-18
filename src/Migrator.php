@@ -1,10 +1,10 @@
 <?php
 namespace Migrator;
 
+use Exception;
 use OutOfRangeException;
 use PDO;
 use RuntimeException;
-use Throwable;
 
 class Migrator
 {
@@ -43,17 +43,23 @@ class Migrator
     public function getVersionRange(): array
     {
         $current = $this->version_log->getCurrentVersion($this->pdo);
-        for ($highest = $current; $this->migration_reader->upgradeExistsTo($highest + 1); $highest++);
-        for ($lowest = $current + 1; $this->migration_reader->downgradeExistsFrom($lowest - 1); $lowest--);
+        $highest = $current;
+        while ($this->migration_reader->upgradeExistsTo($highest + 1)) {
+            $highest++;
+        };
+        $lowest = $current + 1;
+        while ($this->migration_reader->downgradeExistsFrom($lowest - 1)) {
+            $lowest--;
+        };
         return [$lowest - 1, $current, $highest];
     }
 
     /**
      * Migrate to version
      * @param int $to_version
-     * @throws Throwable
+     * @throws Exception
      */
-    public function migrateTo(int $to_version)
+    public function migrateTo($to_version)
     {
         list($lowest, $current, $highest) = $this->getVersionRange();
         if ($to_version < $lowest || $to_version > $highest) {
@@ -72,7 +78,7 @@ class Migrator
             }
             $this->version_log->updateVersion($this->pdo, $to_version);
             $this->pdo->commit();
-        } catch (Throwable $e) {
+        } catch (Exception $e) {
             $this->pdo->rollBack();
             throw $e;
         }
@@ -105,7 +111,7 @@ class Migrator
     /**
      * @param string $sql
      */
-    protected function exec(string $sql)
+    protected function exec($sql)
     {
         $result = $this->pdo->exec($sql);
         if ($result === false) {

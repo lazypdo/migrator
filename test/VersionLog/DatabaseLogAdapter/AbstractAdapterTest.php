@@ -9,6 +9,9 @@ class AbstractAdapterTest extends \PHPUnit_Framework_TestCase
      */
     public function testTableNameException()
     {
-        $this->getMockForAbstractClass('Migrator\\VersionLog\\DatabaseLogAdapter\\AbstractAdapter', ['incorrect table name']);
+        $this->getMockForAbstractClass(
+            'Migrator\\VersionLog\\DatabaseLogAdapter\\AbstractAdapter',
+            ['incorrect table name']
+        );
     }
 }

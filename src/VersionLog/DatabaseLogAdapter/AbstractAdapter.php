@@ -14,7 +14,7 @@ abstract class AbstractAdapter
     /**
      * @param string $table Version log table name
      */
-    public function __construct(string $table = '__version_log')
+    public function __construct($table = '__version_log')
     {
         if (!preg_match('/^[\._0-9a-z]+$/', $table)) {
             throw new InvalidArgumentException('Invalid table name');
@@ -42,5 +42,5 @@ abstract class AbstractAdapter
      * @param int $new_version
      * @return void
      */
-    abstract public function updateVersion(PDO $pdo, int $new_version);
+    abstract public function updateVersion(PDO $pdo, $new_version);
 }

@@ -59,7 +59,6 @@ class MigratorTest extends PHPUnit_Framework_TestCase
                 [42, 42, 42], 42, [1, 2, 3], [3, 2],
             ],
         ];
-
     }
 
     /**

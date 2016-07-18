@@ -38,11 +38,11 @@ class PostgreSQL extends AbstractAdapter
      * @param PDO $pdo
      * @param int $new_version
      */
-    public function updateVersion(PDO $pdo, int $new_version)
+    public function updateVersion(PDO $pdo, $new_version)
     {
         $insert = $pdo->prepare("INSERT INTO {$this->table} (version) VALUES (:ver)");
         $insert->execute([
             ':ver' => $new_version,
-        ]);    
+        ]);
     }
 }

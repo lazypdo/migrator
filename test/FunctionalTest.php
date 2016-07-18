@@ -27,7 +27,9 @@ class FunctionalTest extends PHPUnit_Framework_TestCase
         }
         $this->pdo = new PDO('sqlite::memory:', null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
         $this->migrator = new Migrator(
-            $this->pdo, new SingleFolderCallbackMigrationReader(__DIR__ . '/migrations'), new DatabaseLog()
+            $this->pdo,
+            new SingleFolderCallbackMigrationReader(__DIR__ . '/migrations'),
+            new DatabaseLog()
         );
     }
 

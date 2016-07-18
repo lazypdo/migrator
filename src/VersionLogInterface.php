@@ -11,7 +11,7 @@ interface VersionLogInterface
      * @param PDO $pdo
      * @return int
      */
-    public function getCurrentVersion(PDO $pdo): int;
+    public function getCurrentVersion(PDO $pdo);
 
     /**
      * Set version to the new value
@@ -20,5 +20,5 @@ interface VersionLogInterface
      * @return void
      * @internal param int $version
      */
-    public function updateVersion(PDO $pdo, int $new_version);
+    public function updateVersion(PDO $pdo, $new_version);
 }

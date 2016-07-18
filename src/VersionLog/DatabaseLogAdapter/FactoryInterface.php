@@ -5,5 +5,5 @@ use PDO;
 
 interface FactoryInterface
 {
-    public function getAdapter(PDO $pdo): AbstractAdapter;
+    public function getAdapter(PDO $pdo);
 }

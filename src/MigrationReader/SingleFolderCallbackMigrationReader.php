@@ -72,7 +72,7 @@ class SingleFolderCallbackMigrationReader implements MigrationReaderInterface
      * @return bool
      */
     public function downgradeExistsFrom($version)
-    {        
+    {
         return array_key_exists($version, $this->down);
     }
 

@@ -1,5 +1,3 @@
 /phpunit.xml
 /composer.lock
 /vendor
-/migrator.json
-/db.sq3

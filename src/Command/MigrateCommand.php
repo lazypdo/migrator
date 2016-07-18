@@ -46,7 +46,11 @@ class MigrateCommand extends BaseCommand
         }
         if ($target < $current) {
             $helper = $this->getHelper('question');
-            $question = new ConfirmationQuestion('Downgrade requested! Retype the target version to confirm: ', false, "/^$target$/");
+            $question = new ConfirmationQuestion(
+                'Downgrade requested! Retype the target version to confirm: ',
+                false,
+                "/^$target$/"
+            );
             if (!$helper->ask($input, $output, $question)) {
                 throw new RuntimeException('Incorrect answer provided. Aborting.');
             }

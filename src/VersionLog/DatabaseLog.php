@@ -27,7 +27,7 @@ class DatabaseLog implements VersionLogInterface
      * @param PDO $pdo
      * @return int
      */
-    public function getCurrentVersion(PDO $pdo): int
+    public function getCurrentVersion(PDO $pdo)
     {
         $adapter = $this->factory->getAdapter($pdo);
         $adapter->init($pdo);
@@ -41,7 +41,7 @@ class DatabaseLog implements VersionLogInterface
      * @return void
      * @internal param int $version
      */
-    public function updateVersion(PDO $pdo, int $new_version)
+    public function updateVersion(PDO $pdo, $new_version)
     {
         $adapter = $this->factory->getAdapter($pdo);
         $adapter->init($pdo);
