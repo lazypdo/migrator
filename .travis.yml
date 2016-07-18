@@ -6,6 +6,10 @@ php:
   - '7.0'
   - hhvm
   - nightly
+
+before_script:
+  - composer install
+
 script:
   - vendor/bin/phpcs --standard=PSR2 src/ test/
   - phpunit

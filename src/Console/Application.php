@@ -4,6 +4,7 @@ namespace Migrator\Console;
 use Migrator\Command\MigrateCommand;
 use Migrator\Command\StatusCommand;
 use Migrator\Factory\Config\JSONConfigProvider;
+use Migrator\Factory\Config\PHPConfigProvider;
 use Migrator\Factory\ConfigurableFactory;
 use Migrator\Factory\FactoryInterface;
 use Symfony\Component\Console\Application as ConsoleApplication;
@@ -16,7 +17,7 @@ class Application extends ConsoleApplication
 {
     const VERSION = '0.0.0';
 
-    const DEFAULT_CONFIG_FILE = 'migrator.json';
+    const DEFAULT_CONFIG_FILE = 'migrator.php';
 
     /**
      * @var FactoryInterface
@@ -34,10 +35,9 @@ class Application extends ConsoleApplication
 
     public function doRun(InputInterface $input, OutputInterface $output)
     {
-        $config_file = $input->getParameterOption(['--config', '-c'], self::DEFAULT_CONFIG_FILE);
-        $this->factory = new ConfigurableFactory(
-            new JSONConfigProvider($config_file)
-        );
+        if ($this->getFactory() instanceof FactoryInterface) {
+            $this->setDefaultFactory($input);
+        }
         return parent::doRun($input, $output);
     }
 
@@ -47,6 +47,14 @@ class Application extends ConsoleApplication
     public function getFactory()
     {
         return $this->factory;
+    }
+
+    /**
+     * @param FactoryInterface $factory
+     */
+    public function setFactory(FactoryInterface $factory)
+    {
+        $this->factory = $factory;
     }
 
     /**
@@ -65,5 +73,19 @@ class Application extends ConsoleApplication
             )
         );
         return $def;
+    }
+
+    private function setDefaultFactory(InputInterface $input)
+    {
+        $config_file = $input->getParameterOption(['--config', '-c'], self::DEFAULT_CONFIG_FILE);
+        $ext = pathinfo($config_file, PATHINFO_EXTENSION);
+        switch ($ext) {
+            case 'php':
+                $provider = new PHPConfigProvider($config_file);
+                break;
+            default:
+                $provider = new JSONConfigProvider($config_file);
+        }
+        $this->setFactory(new ConfigurableFactory($provider));
     }
 }

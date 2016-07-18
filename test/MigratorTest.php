@@ -6,6 +6,7 @@ use Migrator\Migrator;
 use OutOfRangeException;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
+use PHPUnit_Runner_Version;
 
 class MigratorTest extends PHPUnit_Framework_TestCase
 {
@@ -36,6 +37,9 @@ class MigratorTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        if (PHPUnit_Runner_Version::id() < '5.0.0') {
+            $this->markTestSkipped('PDO mocking is not possible');
+        }
         $this->pdo = $this->getMockBuilder('PDO')
             ->disableOriginalConstructor()
             ->getMock();

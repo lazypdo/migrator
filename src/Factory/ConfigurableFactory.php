@@ -1,13 +1,12 @@
 <?php
 namespace Migrator\Factory;
 
-use InvalidArgumentException;
 use Migrator\Factory\Config\ProviderInterface;
 use Migrator\MigrationReader\SingleFolderCallbackMigrationReader;
 use Migrator\Migrator;
 use Migrator\VersionLog\DatabaseLog;
-use OutOfBoundsException;
 use PDO;
+use RuntimeException;
 
 class ConfigurableFactory implements FactoryInterface
 {
@@ -34,42 +33,24 @@ class ConfigurableFactory implements FactoryInterface
     {
         $config = array_merge(
             [
-                'options'  => [],
-                'user'     => null,
-                'password' => null,
+                'options'    => [],
+                'user'       => null,
+                'password'   => null,
+                'migrations' => 'migrations',
             ],
             $this->provider->getConfig($name)
         );
-        try {
-            $dsn = $this->getKey('dsn', $config);
-            $pdo = new PDO(
-                $dsn,
-                $this->getKey('user', $config),
-                $this->getKey('password', $config),
-                $this->getKey('options', $config)
-            );
-            $reader = new SingleFolderCallbackMigrationReader(
-                $this->getKey('migrations', $config)
-            );
-        } catch (OutOfBoundsException $e) {
-            throw new InvalidArgumentException(
-                "Value for '{$e->getMessage()}' must be configured for database '$name'"
-            );
+        if (empty($config['dsn'])) {
+            throw new RuntimeException("DSN in not configured for database $name");
         }
+        $pdo = new PDO(
+            $config['dsn'],
+            $config['user'],
+            $config['password'],
+            $config['options']
+        );
+        $reader = new SingleFolderCallbackMigrationReader($config['migrations']);
         $log = new DatabaseLog();
         return new Migrator($pdo, $reader, $log);
-    }
-
-    /**
-     * @param string $key
-     * @param array  $conf
-     * @return mixed
-     */
-    private function getKey($key, array $conf)
-    {
-        if (array_key_exists($key, $conf)) {
-            return $conf[$key];
-        }
-        throw new OutOfBoundsException($key);
     }
 }

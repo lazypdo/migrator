@@ -70,7 +70,8 @@ class FunctionalTest extends PHPUnit_Framework_TestCase
      */
     public function testMigrationAndRange(array $data_set)
     {
-        foreach ($data_set as list($version, $range, $expectedTables)) {
+        foreach ($data_set as $parameters) {
+            list($version, $range, $expectedTables) = $parameters;
             $this->migrator->migrateTo($version);
             $this->assertEquals($range, $this->migrator->getVersionRange());
             $tables = $this->getTables();

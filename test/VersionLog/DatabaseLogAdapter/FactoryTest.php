@@ -2,6 +2,7 @@
 namespace Tests\VersionLog\DatabaseLogAdapter;
 
 use Migrator\VersionLog\DatabaseLogAdapter\Factory;
+use PHPUnit_Runner_Version;
 
 class FactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -9,13 +10,16 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        if (PHPUnit_Runner_Version::id() < '5.0.0') {
+            $this->markTestSkipped('PDO mocking is not possible');
+        }
         $this->pdo = $this->getMockBuilder('PDO')
             ->disableOriginalConstructor()
             ->setMethods(['getAttribute'])
             ->getMock();
     }
 
-    public function driverDataProvider(): array
+    public function driverDataProvider()
     {
         return [
             ['sqlite', '\\Migrator\\VersionLog\\DatabaseLogAdapter\\SQLite'],

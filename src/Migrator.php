@@ -40,7 +40,7 @@ class Migrator
      * Get the possible version range. The lowest, current, and highest version
      * @return int[] [$lowest, $current, $highest]
      */
-    public function getVersionRange(): array
+    public function getVersionRange()
     {
         $current = $this->version_log->getCurrentVersion($this->pdo);
         $highest = $current;
