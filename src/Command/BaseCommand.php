@@ -33,11 +33,14 @@ class BaseCommand extends Command implements FactoryInterface
      */
     protected function printStatus(OutputInterface $output, $name, $lowest, $current, $highest)
     {
-        $upgrade = ($highest > $current) ? $highest : 'none';
-        $downgrade = ($lowest < $current) ? $lowest : 'none';
         $output->writeln("Database:        <info>$name</info>");
         $output->writeln("At version:      <info>$current</info>");
-        $output->writeln("Upgradable to:   <info>$upgrade</info>");
-        $output->writeln("Downgradable to: <info>$downgrade</info>");
+        $output->writeln("");
+        if ($highest > $current) {
+            $output->writeln("Upgradable to:   <info>$highest</info>");
+        }
+        if ($lowest < $current) {
+            $output->writeln("Downgradable to: <info>$lowest</info>");
+        }
     }
 }

@@ -48,7 +48,7 @@ class SingleFolder implements MigrationReaderInterface
      */
     public function match($filename, &$version, &$is_upgrade)
     {
-        if (preg_match('/(?<version>^\d+)\.(?<dir>up|dn|down)(\..+)?\.sql$/', $filename, $match)) {
+        if (preg_match('/^(?<version>\d+)\.(?<dir>up|dn|down)(\..+)?\.sql$/', $filename, $match)) {
             $version = (int) $match['version'];
             $is_upgrade = ($match['dir'] === 'up');
             return true;
