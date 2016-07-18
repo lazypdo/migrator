@@ -9,15 +9,16 @@ Use composer: `composer require lazypdo/migrator`
 Migrations is a set of SQL files residing in a dedicated directory.
 
 ### Naming
-Every migration is a SQL file. The file name name consists of
-- version, a natural (positive integer) number
-- direction, either "up" or "down"
-- optional memo
-- "sql" extension
+Every migration is a SQL file. The naming convention is the following:
+`<version>.<direction>.<memo>.sql`
+
+- version: a natural (positive integer) number
+- direction: either "up" or "down"
+- memo: optional text
 
 Examples:
 - 0004.up.create_foo_table.sql
-- 1.down.sql
+- 042.down.sql
 
 It is recommended to put a few leading zeros to make the migrations appear nicely sorted in file managers.
 
@@ -25,7 +26,7 @@ It is recommended to put a few leading zeros to make the migrations appear nicel
 * A file **N.up.sql** defines the migration **from N-1 to N**. 
 * A file **N.down.sql** defines the migration **from N back to N-1**.
 
-Versions must start with 1. Every consequential upward migration must take the next natural number. 
+Versioning start with 1. Every consequential upward migration must take the next natural number. 
 When it is not possible to create a corresponding downward migration, it must be omitted. 
 E.g. if "42.up.sql" exists, but "42.down.sql" does not, Migrator will only be able to go from 41 to 42 but never back.
 
@@ -58,7 +59,7 @@ either be in the current directory or specified using `--config` option:
 
 It is also possible to use json configs.
 
-Migrator has just two commands: status and migrate.
+Migrator has just two commands: _status_ and _migrate_.
 
 ### Status
 Shows the current status of the given database. The default database
@@ -92,7 +93,7 @@ class MyMigratorFactory implements \Migrator\Factory\FactoryInterface
     {
         // Here you will need 3 components
         /* @var PDO */
-        $pdo = ...;// get it from your config according to the $name
+        $pdo = ...;// Get it from your config according to the $name
         
         /* @var \Migrator\MigrationReaderInterface */
         $migrationReader = ...; // Use \Migrator\MigrationReader\SingleFolderCallbackMigrationReader or create your own
@@ -132,4 +133,4 @@ $app->run();
 
 Make it executable: `chmod +x my_migrator`.
 
-You're done.
+Done.
