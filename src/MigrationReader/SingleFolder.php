@@ -5,7 +5,7 @@ use DirectoryIterator;
 use Migrator\MigrationReaderInterface;
 use OutOfBoundsException;
 
-class SingleFolderCallbackMigrationReader implements MigrationReaderInterface
+class SingleFolder implements MigrationReaderInterface
 {
     /**
      * @var array

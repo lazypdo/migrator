@@ -2,7 +2,7 @@
 namespace Migrator\Factory;
 
 use Migrator\Factory\Config\ProviderInterface;
-use Migrator\MigrationReader\SingleFolderCallbackMigrationReader;
+use Migrator\MigrationReader\SingleFolder;
 use Migrator\Migrator;
 use Migrator\VersionLog\DatabaseLog;
 use PDO;
@@ -49,7 +49,7 @@ class ConfigurableFactory implements FactoryInterface
             $config['password'],
             $config['options']
         );
-        $reader = new SingleFolderCallbackMigrationReader($config['migrations']);
+        $reader = new SingleFolder($config['migrations']);
         $log = new DatabaseLog();
         return new Migrator($pdo, $reader, $log);
     }

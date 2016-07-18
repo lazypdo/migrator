@@ -1,11 +1,11 @@
 <?php
 namespace Tests\MigrationReader;
 
-use Migrator\MigrationReader\SingleFolderCallbackMigrationReader;
+use Migrator\MigrationReader\SingleFolder;
 use OutOfBoundsException;
 use PHPUnit_Framework_TestCase;
 
-class SingleFolderCallbackMigrationReaderTest extends PHPUnit_Framework_TestCase
+class SingleFolderTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @expectedException OutOfBoundsException
@@ -13,7 +13,7 @@ class SingleFolderCallbackMigrationReaderTest extends PHPUnit_Framework_TestCase
      */
     public function testInvalidUpgradeVersion()
     {
-        $reader = new SingleFolderCallbackMigrationReader(__DIR__ . '/../migrations');
+        $reader = new SingleFolder(__DIR__ . '/../migrations');
         $reader->getUpgradeTo(42);
     }
 
@@ -23,7 +23,7 @@ class SingleFolderCallbackMigrationReaderTest extends PHPUnit_Framework_TestCase
      */
     public function testInvalidDowngradeVersion()
     {
-        $reader = new SingleFolderCallbackMigrationReader(__DIR__ . '/../migrations');
+        $reader = new SingleFolder(__DIR__ . '/../migrations');
         $reader->getDowngradeFrom(42);
     }
 }
