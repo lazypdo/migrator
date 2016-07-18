@@ -120,7 +120,7 @@ class MyMigratorApplication extends \Migrator\Console\Application
 }
 ```
 
-### 3. Create your binary
+### 3. Create your executable
 Create a file called `my_migrator` in your project's bin directory.
 
 ```php
