@@ -6,7 +6,7 @@ which would be easy to integrate with your project or to use standalone.
 Use composer: `composer require lazypdo/migrator`
 
 ## Migrations
-Migrations is a set of SQL files residing in a special directory.
+Migrations is a set of SQL files residing in a dedicated directory.
 
 ### Naming
 Every migration is a SQL file. The file name name consists of
