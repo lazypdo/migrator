@@ -17,7 +17,7 @@ class StatusCommand extends BaseCommand
             ->setName('status')
             ->setDescription('Database status')
             ->addArgument(
-                'name',
+                'database',
                 InputArgument::OPTIONAL,
                 'Database name',
                 'default'

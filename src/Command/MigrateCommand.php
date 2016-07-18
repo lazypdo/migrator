@@ -19,7 +19,7 @@ class MigrateCommand extends BaseCommand
             ->setAliases(['update'])
             ->setDescription('Migrates the database to the given version')
             ->addArgument(
-                'name',
+                'database',
                 InputArgument::OPTIONAL,
                 'Database name',
                 'default'
