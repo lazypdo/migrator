@@ -6,6 +6,8 @@ use PDO;
 
 abstract class AbstractAdapter
 {
+    const DEFAULT_TABLE_NAME = '__version_log';
+
     /**
      * @var string
      */
@@ -14,7 +16,7 @@ abstract class AbstractAdapter
     /**
      * @param string $table Version log table name
      */
-    public function __construct($table = '__version_log')
+    public function __construct($table = self::DEFAULT_TABLE_NAME)
     {
         if (!preg_match('/^[\._0-9a-z]+$/', $table)) {
             throw new InvalidArgumentException('Invalid table name');

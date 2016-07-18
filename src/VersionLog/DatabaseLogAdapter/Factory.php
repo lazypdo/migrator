@@ -12,6 +12,20 @@ class Factory implements FactoryInterface
     private $adapters = [];
 
     /**
+     * @var string
+     */
+    private $table_name;
+
+    /**
+     * Factory constructor.
+     * @param string $table_name
+     */
+    public function __construct($table_name = AbstractAdapter::DEFAULT_TABLE_NAME)
+    {
+        $this->table_name = $table_name;
+    }
+
+    /**
      * @param PDO $pdo
      * @return AbstractAdapter
      */
@@ -24,10 +38,10 @@ class Factory implements FactoryInterface
         switch ($driver) {
             case 'sqlite':
             case 'sqlite2':
-                $adapter = new SQLite();
+                $adapter = new SQLite($this->table_name);
                 break;
             case 'pgsql':
-                $adapter = new PostgreSQL();
+                $adapter = new PostgreSQL($this->table_name);
                 break;
             default:
                 throw new RuntimeException("Adapter for $driver is not yet implemented. Mind opening a pull request?");
