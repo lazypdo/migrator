@@ -1,6 +1,6 @@
 # Migrator is a simple database migration tool for PHP
 The goal of this project is to create a simple yet modular database migration tool 
-which would be easy to integrate with your project or to use as a standalone tool.
+which would be easy to integrate with your project or to use standalone.
 
 ## Installation
 Use composer: `composer require lazypdo/migrator`
