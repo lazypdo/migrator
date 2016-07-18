@@ -12,19 +12,19 @@ Migrations is a set of SQL files residing in a dedicated directory.
 Every migration is a SQL file. The naming convention is the following:
 `<version>.<direction>.<memo>.sql`
 
-- version: a natural (positive integer) number
-- direction: either "up" or "down"
-- memo: optional text
+- _version_: a natural (positive integer) number
+- _direction_: either "up" or "down"
+- _memo_: optional text
 
 Examples:
-- 0004.up.create_foo_table.sql
-- 042.down.sql
+- `0004.up.create_foo_table.sql`
+- `042.down.sql`
 
 It is recommended to put a few leading zeros to make the migrations appear nicely sorted in file managers.
 
 ### Versions
-* A file **N.up.sql** defines the migration **from N-1 to N**. 
-* A file **N.down.sql** defines the migration **from N back to N-1**.
+* A file `<N>.up.sql` defines the migration **from N-1 to N**. 
+* A file `<N>.down.sql` defines the migration **from N back to N-1**.
 
 Versioning start with 1. Every consequential upward migration must take the next natural number. 
 When it is not possible to create a corresponding downward migration, it must be omitted. 
