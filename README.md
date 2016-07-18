@@ -26,7 +26,7 @@ It is recommended to put a few leading zeros to make the migrations appear nicel
 * A file `<N>.up.sql` defines the migration **from N-1 to N**. 
 * A file `<N>.down.sql` defines the migration **from N back to N-1**.
 
-Versioning startы with 1. Every consequential upward migration must take the next natural number. 
+Versioning starts with 1. Every consequential upward migration must take the next natural number. 
 When it is not possible to create a corresponding downward migration, it must be omitted. 
 E.g. if "42.up.sql" exists, but "42.down.sql" does not, Migrator will only be able to go from 41 to 42 but never back.
 
