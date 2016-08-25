@@ -43,6 +43,9 @@ class Factory implements FactoryInterface
             case 'pgsql':
                 $adapter = new PostgreSQL($this->table_name);
                 break;
+            case 'mysql':
+                $adapter = new MySQL($this->table_name);
+                break;
             default:
                 throw new RuntimeException("Adapter for $driver is not yet implemented. Mind opening a pull request?");
         }
