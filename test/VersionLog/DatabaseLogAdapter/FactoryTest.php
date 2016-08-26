@@ -25,6 +25,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             ['sqlite', '\\Migrator\\VersionLog\\DatabaseLogAdapter\\SQLite'],
             ['sqlite2', '\\Migrator\\VersionLog\\DatabaseLogAdapter\\SQLite'],
             ['pgsql', '\\Migrator\\VersionLog\\DatabaseLogAdapter\\PostgreSQL'],
+            ['mysql', '\\Migrator\\VersionLog\\DatabaseLogAdapter\\MySQL'],
         ];
     }
 
