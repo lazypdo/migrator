@@ -76,7 +76,7 @@ range: the minimal and maximum version possible to migrate to.
 ### Migrate
 Migrates the database to the given target version.
 
-`./migrator my_database migrate <version>`
+`./migrator my_database migrate [version]`
 
 * _version_: target version. If omitted, the highest possible version will be used.
 
