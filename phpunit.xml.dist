@@ -21,10 +21,10 @@
     </filter>
 
     <php>
-        <const name="DB_NAME" value="mysql_test"/>
-        <const name="DB_HOST" value="127.0.0.1"/>
-        <const name="DB_USER" value="root"/>
-        <const name="DB_PASSWORD" value=""/>
+        <const name="MYSQL_TEST_DB_NAME" value="mysql_test"/>
+        <const name="MYSQL_TEST_DB_HOST" value="127.0.0.1"/>
+        <const name="MYSQL_TEST_DB_USER" value="travis"/>
+        <const name="MYSQL_TEST_DB_PASSWORD" value=""/>
     </php>
 
 </phpunit>

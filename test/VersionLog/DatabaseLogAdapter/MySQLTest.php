@@ -7,34 +7,42 @@ use PDOException;
 
 class MySQLTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var PDO
+     */
     private $pdo;
 
-    private $mysqlObj;
+    /**
+     * @var MySQL
+     */
+    private $mysqlAdapter;
 
     public function setUp()
     {
         if (!extension_loaded('pdo_mysql')) {
-            $this->markTestSkipped('pdo_mysql extension is needed to run tests');
+            $this->markTestSkipped('pdo_mysql extension is not loaded');
         }
 
         try {
+            /**
+             * MYSQL_TEST_DB_* constants are defined in phpunut.xml.dist
+             */
             $this->pdo = new PDO(
-                'mysql:dbname=' . DB_NAME . '; host=' . DB_HOST,
-                DB_USER,
-                DB_PASSWORD,
+                sprintf('mysql:dbname=%s;host=%s', MYSQL_TEST_DB_NAME, MYSQL_TEST_DB_HOST),
+                MYSQL_TEST_DB_USER,
+                MYSQL_TEST_DB_PASSWORD,
                 [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
             );
         } catch (PDOException $e) {
             $this->markTestSkipped(
-                'this test using travis mysql with arg
-                DB_NAME = mysql_test,
-                DB_HOST = 127.0.0.1,
-                DB_USER = root,
-                DB_PASSWORD = "" '
+                sprintf(
+                    'Exception: %s. Set MYSQL_TEST_DB_* constants in phpunit.xml to connect to a local database',
+                    $e->getMessage()
+                )
             );
         }
 
-        $this->mysqlObj = new MySQL();
+        $this->mysqlAdapter = new MySQL();
     }
 
     public function versionDataProvider()
@@ -54,10 +62,8 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
      */
     public function testMySQLAdapter($version, $expected)
     {
-        $this->assertNull($this->mysqlObj->init($this->pdo));
-
-        $this->mysqlObj->updateVersion($this->pdo, $version);
-
-        $this->assertEquals($expected, $this->mysqlObj->getCurrentVersion($this->pdo));
+        $this->assertNull($this->mysqlAdapter->init($this->pdo));
+        $this->mysqlAdapter->updateVersion($this->pdo, $version);
+        $this->assertEquals($expected, $this->mysqlAdapter->getCurrentVersion($this->pdo));
     }
 }
