@@ -5,6 +5,7 @@ use Migrator\Command\MigrateCommand;
 use Migrator\Command\StatusCommand;
 use Migrator\Factory\Config\JSONConfigProvider;
 use Migrator\Factory\Config\PHPConfigProvider;
+use Migrator\Factory\Config\YAMLConfigProvider;
 use Migrator\Factory\ConfigurableFactory;
 use Migrator\Factory\FactoryInterface;
 use Symfony\Component\Console\Application as ConsoleApplication;
@@ -49,6 +50,10 @@ class Application extends ConsoleApplication
             switch (pathinfo($config_file, PATHINFO_EXTENSION)) {
                 case 'php':
                     $provider = new PHPConfigProvider($config_file);
+                    break;
+                case 'yaml':
+                case 'yml':
+                    $provider = new YAMLConfigProvider($config_file);
                     break;
                 default:
                     $provider = new JSONConfigProvider($config_file);

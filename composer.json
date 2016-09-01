@@ -26,11 +26,15 @@
   "require-dev": {
     "phpunit/phpunit": "^4.8 ||^5.0",
     "squizlabs/php_codesniffer": "^2.0",
-    "satooshi/php-coveralls": "dev-master"
+    "satooshi/php-coveralls": "dev-master",
+    "symfony/yaml": "^3.1"
   },
   "autoload": {
     "psr-4": {
       "Migrator\\": "src/"
     }
+  },
+  "suggest": {
+    "symfony/yaml": "Allows using YAML config files"
   }
 }
