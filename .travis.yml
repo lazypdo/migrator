@@ -7,9 +7,13 @@ php:
   - hhvm
   - nightly
 
+services:
+  - mysql
+
 before_script:
   - composer install
 
 script:
   - vendor/bin/phpcs --standard=PSR2 src/ test/
+  - mysql -e 'create database mysql_test;'
   - phpunit
