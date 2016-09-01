@@ -8,7 +8,6 @@ use Migrator\Factory\Config\PHPConfigProvider;
 use Migrator\Factory\ConfigurableFactory;
 use Migrator\Factory\FactoryInterface;
 use Symfony\Component\Console\Application as ConsoleApplication;
-use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
