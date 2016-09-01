@@ -63,7 +63,7 @@ either be in the current directory or specified using `--config` option:
 
 `./migrator --config=/path/to/migrator.php status`
 
-It is also possible to use json configs.
+It is also possible to use json and yaml configs.
 
 Migrator has just two commands: _status_ and _migrate_.
 
