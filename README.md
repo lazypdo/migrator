@@ -1,4 +1,9 @@
 # Migrator is a simple database migration tool for PHP
+[![Total Downloads](https://img.shields.io/packagist/dt/lazypdo/migrator.svg)](https://packagist.org/packages/lazypdo/migrator)
+[![Latest Stable Version](https://img.shields.io/packagist/v/lazypdo/migrator.svg)](https://packagist.org/packages/lazypdo/migrator)
+[![Travis Build](https://travis-ci.org/lazypdo/migrator.svg?branch=master)](https://travis-ci.org/lazypdo/migrator)
+[![SensioLabs Insight](https://img.shields.io/sensiolabs/i/c44976d6-9726-4aae-a423-865211cbc5b2.svg)](https://insight.sensiolabs.com/projects/c44976d6-9726-4aae-a423-865211cbc5b2)
+
 The goal of this project is to create a simple yet modular database migration tool 
 which would be easy to integrate with your project or to use standalone.
 
