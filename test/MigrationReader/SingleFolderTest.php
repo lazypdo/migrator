@@ -13,7 +13,7 @@ class SingleFolderTest extends PHPUnit_Framework_TestCase
      */
     public function testInvalidUpgradeVersion()
     {
-        $reader = new SingleFolder(__DIR__ . '/../migrations');
+        $reader = new SingleFolder(__DIR__ . '/../stubs/migrations');
         $reader->getUpgradeTo(42);
     }
 
@@ -23,7 +23,7 @@ class SingleFolderTest extends PHPUnit_Framework_TestCase
      */
     public function testInvalidDowngradeVersion()
     {
-        $reader = new SingleFolder(__DIR__ . '/../migrations');
+        $reader = new SingleFolder(__DIR__ . '/../stubs/migrations');
         $reader->getDowngradeFrom(42);
     }
 }
