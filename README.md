@@ -5,7 +5,7 @@
 [![SensioLabs Insight](https://img.shields.io/sensiolabs/i/c44976d6-9726-4aae-a423-865211cbc5b2.svg)](https://insight.sensiolabs.com/projects/c44976d6-9726-4aae-a423-865211cbc5b2)
 [![Coverage Status](https://coveralls.io/repos/github/lazypdo/migrator/badge.svg?branch=master)](https://coveralls.io/github/lazypdo/migrator?branch=master)
 
-The goal of this project is to create a simple yet modular database migration tool 
+The goal of this project is to create a simple yet modular database schema migration tool 
 which would be easy to integrate with your project or to use standalone.
 
 ## Installation
