@@ -6,7 +6,9 @@
     "pdo",
     "database",
     "migration",
-    "sql"
+    "sql",
+    "schema",
+    "db"
   ],
   "license": "MIT",
   "authors": [
