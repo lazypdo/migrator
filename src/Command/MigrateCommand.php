@@ -16,7 +16,6 @@ class MigrateCommand extends BaseCommand
     {
         $this
             ->setName('migrate')
-            ->setAliases(['update'])
             ->setDescription('Migrates the database to the given version')
             ->addArgument(
                 'database',
